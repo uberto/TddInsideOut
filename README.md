@@ -57,7 +57,7 @@ Participants will pair to complete each TDD kata using Cyber Dojo: http://www.cy
 
 
 
-** Example **
+**Example**
 
 
 We start with the first test:
