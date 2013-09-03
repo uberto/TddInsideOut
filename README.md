@@ -33,11 +33,12 @@ At the end of every refactoring you should have archived at least one of the abo
 
 
 Moreover refactoring steps should follow these rules:
- a. You can extract logic to new static pure methods.
- b. You can extract variables and primitives to new immutable objects (Value Object) with only getters and no setters. VO can contains other VO but not Entities.
- c. You can create mutable objects (Entity) by combining together existing static methods and local variables in a new mutable entity. Entities cannot expose directly their inner status, that is they cannot have getters. They can have method that return result of calculation involving their inner state. 
- d. Try to use composition over inheritance.
- e. Never pass or return null. Use NullObject pattern or TellDontCall
+
+ - (a) You can extract logic to new static pure methods.
+ - (b) You can extract variables and primitives to new immutable objects (Value Object) with only getters and no setters. VO can contains either VO or primitive types but not Entities (see next rule).
+ - (c) You can create mutable-state objects (Entity) by combining together existing static methods and local variables. Entities cannot expose directly their inner status, that is they cannot have getters. They can have method that return result of calculation involving their inner state. 
+ - (d) Try to use composition over inheritance.
+ - (e) Never pass or return null. Use NullObject or TellDontAsk pattern.
 
 In any case each refactoring step should be small and quick. Check often that tests are still green. Remember you are not allowed to do refactoring with red tests!
 See also: http://jonjagger.blogspot.co.uk/2009/06/average-time-to-green-game.html
