@@ -37,8 +37,9 @@ Moreover refactoring steps should follow these rules:
  - (a) You can extract logic to new static pure methods.
  - (b) You can extract variables and primitives to new immutable objects (Value Object) with only getters and no setters. VO can contains either VO or primitive types but not Entities (see next rule).
  - (c) You can create mutable-state objects (Entity) by combining together existing static methods and local variables. Entities cannot expose directly their inner status, that is they cannot have getters. They can have method that return result of calculation involving their inner state. 
- - (d) Try to use composition over inheritance.
- - (e) Never pass or return null. Use NullObject or TellDontAsk pattern.
+ - (d) Never assign or pass an Entity using its class but always use its interface.
+ - (e) Try to use composition over inheritance.
+ - (f) Never pass or return null. Use NullObject or TellDontAsk pattern.
 
 In any case each refactoring step should be small and quick. Check often that tests are still green. Remember you are not allowed to do refactoring with red tests!
 See also: http://jonjagger.blogspot.co.uk/2009/06/average-time-to-green-game.html
@@ -54,5 +55,37 @@ Participants will pair to complete each TDD kata using Cyber Dojo: http://www.cy
 
 
 
+** Example **
 
+We start with the first test:
+```
+assertEquals("first a flip", "flip", flipflop());
+```		
+To make it compile we write _flipflop()_ as a static function inside the Test class.
+Once it's green, we don't need any special refactoring so we add a new test.
+The second test:
+```
+assertEquals("first a flip", "flip", flipflop());
+assertEquals("then a flop", "flop", flipflop());
+```
+to make it possible to work (static method, remember?) we add a var:
+```
+String flip = flipflop("");
+assertEquals("first a flip", "flip", flip);
+String flop = flipflop(flip);
+assertEquals("then a flop", "flop", flop);
+```		
+Once it's green, we want to simply it, removing the need of an external state, so we create a Entity that keep the state internally:
+```	
+Flipflop ff = new Flipflop();
+assertEquals("first a flip", "flip", ff.switch());
+assertEquals("then a flop", "flop", ff.switch());
+```
+And then we make sure to use an interface to refer it:
+```
+Switch ff = new Flipflop();
+assertEquals("first a flip", "flip", ff.switch());
+assertEquals("then a flop", "flop", ff.switch());
+```
+Now we can add a new test...
 
