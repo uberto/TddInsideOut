@@ -59,6 +59,7 @@ Participants will pair to complete each TDD kata using Cyber Dojo: http://www.cy
 
 ** Example **
 
+
 We start with the first test:
 ```
 assertEquals("first a flip", "flip", flipflop());
