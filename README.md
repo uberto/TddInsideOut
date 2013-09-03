@@ -59,6 +59,7 @@ Participants will pair to complete each TDD kata using Cyber Dojo: http://www.cy
 
 **Example**
 
+Let's say we want to have an method that returns "flip" and "flop" alternatively each time it's called.
 
 We start with the first test:
 ```
